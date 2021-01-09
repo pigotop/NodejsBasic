@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.ckeditor.com/ckeditor5/24.0.0/classic/ckeditor.js"></script>
+</head>
+<body>
+    <%- include layout %>
+    <div class="container">
+        <h2 align = "center">ADD Blog</h2>
+        <%- messages() %>
+        <% if(locals.errors){%>
+        <ul class="alert alert-danger">
+            <% Object.values(errors).forEach(function(error){ %>
+                <li> <%= error.msg %> </li>
+            <% }) %>
+           
+        </ul>
+        <% } %>
+
+        <form action="/blog/add" class="" method="POST">
+            <div class="form-group">
+                <label for="">ชื่อบทความ</label>
+                <input type="text" name="name" value="" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="">รายละเอียด</label>
+                <textarea id="description" name="description" rows="8" cols="80" class="form-control"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="">ผู้แต่ง</label>
+                <input type="text" name="author" value="" class="form-control">
+            </div>
+            <input type="submit" name="" value="บันทึก" class="btn btn-primary">
+        </form>
+    </div>
+    <script>
+
+            $(function(){
+                $('#messages').addClass('alert alert-success');
+            })
+
+        ClassicEditor.create( document.querySelector( '#description' ) ).catch( error => {
+                console.error( error );
+            } );
+    </script>
+</body>
+</html>
